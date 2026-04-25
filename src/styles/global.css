@@ -1,0 +1,129 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #F5F0E8;
+  --surface: #FFFFFF;
+  --nav-bg: #EDE3D4;
+  --border: #DDD5C4;
+  --text: #1C1C1C;
+  --text-secondary: #5A5A5A;
+  --text-muted: #8A8A8A;
+  --gold: #9A7B4F;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --max-width: 860px;
+  --reading-width: 680px;
+}
+
+html {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.tag-label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* Prose (blog post body) */
+.prose {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.3;
+  margin-top: 2.2em;
+  margin-bottom: 0.7em;
+}
+
+.prose h2 { font-size: 1.55em; }
+.prose h3 { font-size: 1.25em; }
+
+.prose p { margin-bottom: 1.5em; }
+
+.prose a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.6em;
+  margin-bottom: 1.5em;
+}
+
+.prose li { margin-bottom: 0.5em; }
+
+.prose blockquote {
+  border-left: 2px solid var(--gold);
+  padding: 0.25em 0 0.25em 1.25em;
+  margin: 1.75em 0;
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 1.1em;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.prose hr {
+  border: none;
+  border-top: 0.5px solid var(--border);
+  margin: 2.5em 0;
+}
+
+.prose strong { color: var(--text); font-weight: 600; }
+
+.prose img {
+  border-radius: 8px;
+  margin: 2em 0;
+  border: 0.5px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  .container { padding: 0 16px; }
+  .prose { font-size: 16px; }
+}

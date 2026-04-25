@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const readTime = Math.max(1, Math.ceil(post.body.split(/\s+/).length / 200));
+---
+
+<PostLayout post={post} readTime={readTime}>
+  <Content />
+</PostLayout>

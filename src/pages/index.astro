@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import AuthorBio from '../components/AuthorBio.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const recentPosts = allPosts
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 4);
+---
+
+<BaseLayout title="And Still, I Lead">
+  <div class="container">
+    <section class="hero">
+      <span class="tag-label hero-label">Personal Growth · Leadership</span>
+      <h1 class="hero-title">Thoughts from the journey of leading.</h1>
+      <div class="gold-bar"></div>
+      <p class="hero-sub">
+        And Still, I Lead is not about having everything figured out.
+        It is about choosing to show up anyway.
+      </p>
+      <a href="/blog" class="hero-cta">Read all posts →</a>
+    </section>
+
+    {recentPosts.length > 0 && (
+      <section class="recent-section">
+        <h2 class="section-label">Recent</h2>
+        <div class="post-grid">
+          {recentPosts.map(post => <PostCard post={post} />)}
+        </div>
+      </section>
+    )}
+
+    <AuthorBio />
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 72px 0 56px;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 52px;
+  }
+  .hero-label { display: block; margin-bottom: 16px; }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: 38px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.3;
+    max-width: 500px;
+    margin-bottom: 18px;
+  }
+  .gold-bar {
+    width: 36px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 1px;
+    margin-bottom: 22px;
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    max-width: 480px;
+    margin-bottom: 28px;
+  }
+  .hero-cta {
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: 500;
+    transition: opacity 0.15s;
+  }
+  .hero-cta:hover { opacity: 0.7; }
+
+  .recent-section { margin-bottom: 16px; }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 44px 0 36px; }
+    .hero-title { font-size: 28px; }
+    .post-grid { grid-template-columns: 1fr; }
+  }
+</style>

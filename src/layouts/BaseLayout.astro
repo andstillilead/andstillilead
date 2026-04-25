@@ -1,0 +1,66 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+}
+
+const {
+  title,
+  description = 'And Still, I Lead is not about having everything figured out. It is about choosing to show up anyway.',
+  image,
+  type = 'website',
+} = Astro.props;
+
+const canonicalUrl = Astro.url.href;
+const ogImage = image ? new URL(image, Astro.site).href : undefined;
+
+const GA_ID = 'G-XXXXXXXXXX'; // Replace with your GA4 Measurement ID after setup
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+
+  <meta property="og:type" content={type} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content="And Still, I Lead" />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+
+  <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+  <link rel="alternate" type="application/rss+xml" title="And Still, I Lead" href="/rss.xml" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Google Analytics 4 — replace G-XXXXXXXXXX with your Measurement ID -->
+  <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+  <script define:vars={{ GA_ID }}>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  </script>
+</head>
+<body>
+  <Nav />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

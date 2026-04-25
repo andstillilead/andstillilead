@@ -1,0 +1,40 @@
+# Replace YOUR_GITHUB_USERNAME with your actual GitHub username (e.g. ciara-lavelle)
+# Replace YOUR_OAUTH_CLIENT_ID with the Client ID from your GitHub OAuth App
+
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/andstillilead
+  branch: main
+  auth_type: pkce
+  app_id: YOUR_OAUTH_CLIENT_ID
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: blog
+    label: Blog Posts
+    folder: src/content/blog
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - {
+          label: Description,
+          name: description,
+          widget: string,
+          hint: "One sentence shown in post previews and search results.",
+        }
+      - { label: Publish Date, name: date, widget: datetime, default: "{{now}}" }
+      - {
+          label: Tags,
+          name: tags,
+          widget: list,
+          default: [],
+          hint: "e.g. Leadership, Personal Growth, Motherhood",
+        }
+      - { label: Featured Image, name: image, widget: image, required: false }
+      - { label: Save as Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }

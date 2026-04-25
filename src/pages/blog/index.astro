@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const sorted = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const allTags = [...new Set(sorted.flatMap(p => p.data.tags))].sort();
+---
+
+<BaseLayout
+  title="Blog — And Still, I Lead"
+  description="All posts from And Still, I Lead."
+>
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title">All Posts</h1>
+      {allTags.length > 0 && (
+        <div class="tag-filters" id="tag-filters">
+          <button class="filter-btn active" data-tag="">All</button>
+          {allTags.map(tag => (
+            <button class="filter-btn" data-tag={tag}>{tag}</button>
+          ))}
+        </div>
+      )}
+    </header>
+
+    {sorted.length > 0 ? (
+      <div class="post-grid" id="post-grid">
+        {sorted.map(post => (
+          <div class="post-item" data-tags={JSON.stringify(post.data.tags)}>
+            <PostCard post={post} />
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">No posts yet. Check back soon.</p>
+    )}
+  </div>
+</BaseLayout>
+
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const items = document.querySelectorAll<HTMLElement>('.post-item');
+
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag ?? '';
+
+      filters.forEach(f => f.classList.remove('active'));
+      btn.classList.add('active');
+
+      items.forEach(item => {
+        const tags: string[] = JSON.parse(item.dataset.tags ?? '[]');
+        item.style.display = (!tag || tags.includes(tag)) ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+<style>
+  .page-header {
+    padding: 52px 0 36px;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 36px;
+  }
+  .page-title {
+    font-family: var(--font-serif);
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 22px;
+  }
+  .tag-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .filter-btn {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover,
+  .filter-btn.active {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding-bottom: 80px;
+  }
+  .post-item { display: flex; }
+  .post-item > * { width: 100%; }
+
+  .empty-state {
+    font-size: 14px;
+    color: var(--text-muted);
+    padding: 60px 0;
+  }
+
+  @media (max-width: 600px) {
+    .post-grid { grid-template-columns: 1fr; }
+    .page-header { padding-top: 36px; }
+  }
+</style>
