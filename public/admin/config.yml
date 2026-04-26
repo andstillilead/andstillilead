@@ -2,8 +2,7 @@ backend:
   name: github
   repo: andstillilead/andstillilead
   branch: main
-  auth_type: pkce
-  app_id: Ov23liJJaP4UWmXL0AMt
+  base_url: https://andstillilead-oauth.mute-bread-e5ba.workers.dev
 
 media_folder: public/images/uploads
 public_folder: /images/uploads
