@@ -7,42 +7,6 @@
     <title>Content Manager — And Still, I Lead</title>
   </head>
   <body>
-    <script>window.CMS_MANUAL_INIT = true;</script>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    <script>
-      CMS.init({
-        config: {
-          backend: {
-            name: 'github',
-            repo: 'andstillilead/andstillilead',
-            branch: 'main',
-            auth_type: 'pkce',
-            app_id: 'Ov23liJJaP4UWmXL0AMt',
-          },
-          media_folder: 'public/images/uploads',
-          public_folder: '/images/uploads',
-          collections: [
-            {
-              name: 'blog',
-              label: 'Blog Posts',
-              folder: 'src/content/blog',
-              create: true,
-              slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
-              extension: 'md',
-              format: 'frontmatter',
-              fields: [
-                { label: 'Title', name: 'title', widget: 'string' },
-                { label: 'Description', name: 'description', widget: 'string', hint: 'One sentence shown in post previews and search results.' },
-                { label: 'Publish Date', name: 'date', widget: 'datetime', default: '{{now}}' },
-                { label: 'Tags', name: 'tags', widget: 'list', default: [], hint: 'e.g. Leadership, Personal Growth, Motherhood' },
-                { label: 'Featured Image', name: 'image', widget: 'image', required: false },
-                { label: 'Save as Draft', name: 'draft', widget: 'boolean', default: false },
-                { label: 'Body', name: 'body', widget: 'markdown' },
-              ],
-            },
-          ],
-        },
-      });
-    </script>
   </body>
 </html>
