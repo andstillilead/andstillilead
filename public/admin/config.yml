@@ -2,7 +2,7 @@ backend:
   name: github
   repo: andstillilead/andstillilead
   branch: main
-  auth_type: implicit
+  auth_type: pkce
   app_id: Ov23liJJaP4UWmXL0AMt
 
 media_folder: public/images/uploads
