@@ -3,10 +3,10 @@
 
 backend:
   name: github
-  repo: YOUR_GITHUB_USERNAME/andstillilead
+  repo: andstillilead/andstillilead
   branch: main
   auth_type: pkce
-  app_id: YOUR_OAUTH_CLIENT_ID
+  app_id: Ov23liJJaP4UWmXL0AMt
 
 media_folder: public/images/uploads
 public_folder: /images/uploads
