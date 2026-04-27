@@ -16,9 +16,7 @@ That pace can start to feel like strength. Like proof that you can handle it, th
 
 My son didn’t mind changing his birthday plan. He was okay with it, and in the moment that made it easier to keep going, easier to believe it wasn’t as big of a deal as it felt.
 
-But I wasn’t okay in the same way.
-
-And that’s the part that stayed with me.
+But I wasn’t okay in the same way. And that’s the part that stayed with me.
 
 Not the decision itself, but the realization that I’ve been making choices like that without always asking myself where my line is, what I’m willing to miss and what I’m not, what I can move past and what actually sits with me after everything else has moved on.
 
