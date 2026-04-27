@@ -1,6 +1,6 @@
 ---
-title: "And Still, I Lead"
-description: "This is not a blog about having it all figured out. It is a record of what happens when you show up anyway."
+title: "I Didn't Start From a Clear Place"
+description: "I didn't start from a clear place. Just somewhere in the middle where I was already carrying more than I could name."
 date: 2026-04-25
 tags: ["Leadership", "Personal Growth"]
 draft: false
