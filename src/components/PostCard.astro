@@ -20,7 +20,7 @@ const readTime = Math.max(1, Math.ceil(post.body.split(/\s+/).length / 200));
 <a href={`/blog/${post.slug}`} class="card">
   {tags[0] && <span class="tag-label card-tag">{tags[0]}</span>}
   <h2 class="card-title">{title}</h2>
-  <p class="card-desc">{description}</p>
+  <p class="card-desc" set:html={description}></p>
   <span class="card-meta">{formattedDate} · {readTime} min read</span>
 </a>
 
