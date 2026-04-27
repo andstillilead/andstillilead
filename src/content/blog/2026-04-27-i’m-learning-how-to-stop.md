@@ -2,7 +2,7 @@
 title: I’m Learning How to Stop
 description: I didn’t realize how much I was pushing through until my body
   stopped letting me. This is what it’s felt like to learn how to pause.
-date: "{{now}}"
+date: "2026-04-27"
 tags:
   - Personal Growth
 draft: false
